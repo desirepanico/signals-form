@@ -1,8 +1,10 @@
-# Componenti dei form E traduzioni
+# Componenti dei form e traduzioni
+
+Riferimento generale: `docs/guida-signal-forms.md`. Regole di validazione e submit: `signal-forms.md`.
 
 ## Componenti shared
 
-Tutti in `src/app/shared/components/<nome>/`, standalone
+Tutti standalone, in `src/app/shared/components/<nome>/`.
 
 | Componente                                      | Ruolo                                                                                                                                                   |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -16,7 +18,7 @@ Tutti in `src/app/shared/components/<nome>/`, standalone
 - Il controllo riceve il `FieldTree` come `[field]` e lega `[formField]="field()"`. Non contiene regole di validazione: mostra solo `invalid()` ed `errors()`.
 - `type` di `input-text` va scritto come attributo fisso nel template (`@switch`), perché `FormField` deve conoscere il tipo nativo (number/date) all'inizializzazione.
 - Un `FieldTree` di tipo diverso da `string` si passa con i cast `asNumber`/`asDate` già presenti in `input-text`.
-- Classi Tailwind condizionali: **un solo set per stato**, come stringhe complete in un ternario in `[class]` (mai `border-slate-300` insieme a `border-red-500`).
+- Classi Tailwind condizionali: vedi `styling.md`.
 
 ## Traduzioni (`public/i18n/it.json`)
 

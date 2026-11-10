@@ -8,12 +8,8 @@ Applicazione Angular 22 con Signal Forms e Tailwind CSS 4.
 - `npm run build`: build di produzione
 - `npm test`: test con Vitest
 
-## Struttura
+## Riferimenti
 
-- Componenti riusabili in `src/app/shared/components/<nome>/` (esempio: `input/input-text`).
-- Regole di dettaglio in `.claude/rules/` (angular, styling, structure).
-
-## Convenzioni
-
-- Form con `@angular/forms/signals`; submit in `form(..., { submission: { action } })` con `[formRoot]`.
-- Stile solo Tailwind, classi condizionali come stringhe complete in `[class]`.
+- Regole di dettaglio in `.claude/rules/`: `angular`, `structure`, `styling`, `signal-forms` (regole, submit, validatori), `form-components` (componenti, traduzioni, toast).
+- Guida ai Signal Forms: `docs/guida-signal-forms.md`. Leggerla prima di creare o modificare un form e aggiornarla se cambiano le regole.
+- Esempi reali: `src/app/pages/login/login.ts` (submit su API), `src/app/pages/register/register.ts` (tutte le regole).

@@ -1,59 +1,42 @@
 # SignalsForm
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.5.
+Applicazione Angular 22 con **Signal Forms** (`@angular/forms/signals`) e Tailwind CSS 4. Progetto generato con [Angular CLI](https://github.com/angular/angular-cli) 22.0.5.
 
-## Development server
-
-To start a local development server, run:
+## Comandi
 
 ```bash
-ng serve
+npm start        # server di sviluppo su http://localhost:4200/
+npm run build    # build di produzione in dist/
+npm test         # test con Vitest
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Struttura
 
-## Code scaffolding
+| Percorso | Contenuto |
+| --- | --- |
+| `src/app/pages/` | pagine: `login` (form semplice con submit su API), `register` (tutte le regole), `home` |
+| `src/app/core/auth/` | `AuthService` e `auth.guard` |
+| `src/app/shared/components/` | componenti riusabili: `input-text`, `input-checkbox`, `field-wrapper`, `error-message`, `toast` |
+| `src/app/shared/validators/` | validatori custom (`password`, `url`) con i relativi `.spec.ts` |
+| `src/app/shared/i18n/` | `translate()` e caricamento traduzioni |
+| `public/i18n/it.json` | tutti i testi di label, errori e toast |
+| `docs/` | documentazione |
+| `.claude/rules/` | regole di dettaglio per Claude Code (angular, form-components, signal-forms, structure, styling) |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Signal Forms
 
-```bash
-ng generate component component-name
-```
+Il progetto usa solo Signal Forms: mai `FormGroup`, `FormControl` o `ngModel`. Un form è fatto di modello (`signal`), regole (funzione schema di `form()`) e template (`[formRoot]` + `[formField]`); l'invio è `submission.action` e restituisce una `Promise`.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Guida completa: [docs/guida-signal-forms.md](docs/guida-signal-forms.md).
 
-```bash
-ng generate --help
-```
+## Convenzioni
 
-## Building
+- Componenti standalone, template in file `.html`, stato con signals, control flow nativo (`@if`, `@for`).
+- Stile solo Tailwind, classi condizionali come stringhe complete in `[class]`.
+- Nessun testo scritto nel codice per label ed errori: tutto in `public/i18n/it.json`.
+- Ogni validatore custom ha il suo `.spec.ts`.
 
-To build the project run:
+## Risorse
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Guida ai Signal Forms del progetto](docs/guida-signal-forms.md)
+- [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)

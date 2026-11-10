@@ -2,6 +2,8 @@
 
 Solo Signal Forms (`@angular/forms/signals`, Angular 22). Mai `FormGroup`/`FormControl`/`ngModel`.
 
+Guida estesa con esempi: `docs/guida-signal-forms.md`. Esempi reali: `pages/login/login.ts` (submit su API), `pages/register/register.ts` (tutte le regole). Se queste regole cambiano, aggiornare anche la guida.
+
 ## Struttura di un form
 
 - Il **modello** è un `signal<Interface>()` tipizzato: contiene solo i dati. Ogni campo che l'utente compila parte con un valore definito (`''`, `null`, `false`, `[]`): per i Signal Forms `undefined` significa «il campo non esiste», quindi non viene creato il suo `FieldTree` e non si può legare a un input. `undefined` è ammesso solo per campi **opzionali che possono mancare del tutto** (`campo?: string`), e nel template vanno protetti prima dell'uso. Per «nessun valore» in un input usare `null` o `''`.
@@ -34,7 +36,9 @@ form = form(
 
 - L'azione sta in `form(..., { submission: { action } })`. `[formRoot]` la esegue **solo se il form è valido** e aggiunge `novalidate` da solo. Niente `(submit)` e niente `submit()` a mano.
 - `action` deve restituire una **`Promise<TreeValidationResult>`**: finché è pendente `form().submitting()` è `true` (usarlo per disabilitare il bottone e cambiare il testo).
-- Con le chiamate RxJS si segue lo standard del progetto: `subscribe({ next, error })` con `takeUntilDestroyed(this._destroyRef)`, dentro una `new Promise` risolta in `next` ed `error`.
+- Con le chiamate RxJS (`takeUntilDestroyed` come in `angular.md`): `subscribe({ next, error, complete })` dentro una `new Promise` risolta in `next`, `error` e `complete` (quest'ultimo evita una Promise pendente se il componente è distrutto a metà chiamata).
+- Nell'`action` non dare a una variabile il nome di una regola importata (es. `const { email } = ...` oscura `email()`): usare `const credentials = field().value()`.
+- Gli errori delle API si mostrano in un toast (vedi `form-components.md`), non come errore di campo: l'`action` risolve comunque con `undefined`.
 
 ## Regole di validazione
 
