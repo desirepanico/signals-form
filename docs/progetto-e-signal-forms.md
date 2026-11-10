@@ -86,6 +86,46 @@ const emailFieldSchema = schema<string>((path) => {
 - `form.email` è il **campo**; il controllo lo riceve come `[field]` e lo lega con `[formField]`.
 - Si leggono i dati con `form().value()` e lo stato di un campo con `form.email()` (per esempio `form.email().touched()`).
 
+#### `formRoot` e `formField`
+
+Sono le due direttive che collegano il template al form. Una sta sul `<form>`, l'altra su ogni `<input>`.
+
+| | `[formRoot]` | `[formField]` |
+| --- | --- | --- |
+| Dove | sul `<form>` | su ogni controllo (`<input>`) |
+| Riceve | il form intero (`form`) | un campo (`form.email`, cioè un `FieldTree`) |
+| Cosa fa | gestisce l'**invio** del form | collega **un campo** al suo input |
+| Dove si importa | nelle pagine (`FormRoot`) | nei componenti dei controlli (`FormField`) |
+
+**`[formRoot]="form"`**
+- Intercetta l'evento di invio e impedisce il ricaricamento della pagina.
+- Se il form è **valido** esegue `submission.action`; se non lo è, non la esegue.
+- Aggiunge da solo `novalidate` (vedi sotto).
+- Per questo nel template non servono `(submit)` né una chiamata a `submit()`.
+
+**`[formField]="form.email"`**
+- Tiene sincronizzati valore dell'input e valore del campo nel modello, nei due versi: se l'utente scrive, cambia il modello; se il modello cambia, cambia l'input.
+- Segna il campo come `touched` quando l'utente esce dall'input.
+- Applica lo stato `disabled` dichiarato nello schema all'input nativo: non si scrive `disabled` nel template.
+- Legge il tipo nativo dell'input (`number`, `date`…) per convertire il valore nel tipo giusto del modello.
+
+**Nel progetto la catena è a due livelli:**
+
+```html
+<!-- pagina: passa il campo al controllo con [field] -->
+<app-input-text label="login.fields.email" type="email" [field]="form.email" />
+```
+
+```html
+<!-- dentro app-input-text: lega il campo all'input vero -->
+<input [type]="type()" [formField]="asString()" />
+```
+
+- `[field]` è un input **del progetto**, definito nei nostri componenti. Porta il `FieldTree` fino al controllo.
+- `[formField]` è la direttiva **di Angular**. Sta solo sull'`<input>` nativo dentro il controllo.
+
+Per `number` e `date`, `app-input-text` scrive il `type` come attributo fisso in un ramo dedicato del `@switch`: `formField` deve conoscere il tipo nativo quando si inizializza.
+
 #### Cos'è `novalidate`
 
 `novalidate` è un attributo HTML del `<form>` che **spegne la validazione nativa del browser**.
