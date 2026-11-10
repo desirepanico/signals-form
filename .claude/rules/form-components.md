@@ -1,6 +1,6 @@
 # Componenti dei form e traduzioni
 
-Riferimento generale: `docs/guida-signal-forms.md`. Regole di validazione e submit: `signal-forms.md`.
+Questa rule riguarda **come il campo è mostrato e con quali parole**. Modello, regole di validazione e submit: `signal-forms.md`. Punto di contatto: la regola restituisce solo un `kind`, il testo sta in `common.validation.<kind>` di `it.json`.
 
 ## Componenti shared
 

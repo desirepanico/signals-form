@@ -2,7 +2,9 @@
 
 Solo Signal Forms (`@angular/forms/signals`, Angular 22). Mai `FormGroup`/`FormControl`/`ngModel`.
 
-Guida estesa con esempi: `docs/guida-signal-forms.md`. Esempi reali: `pages/login/login.ts` (submit su API), `pages/register/register.ts` (tutte le regole). Se queste regole cambiano, aggiornare anche la guida.
+Questa rule riguarda la **logica** del form (modello, schema, submit, stato, validatori). Componenti dei controlli, label, errori tradotti e toast: `form-components.md`. Esempi reali: `pages/login/login.ts` (submit su API), `pages/register/register.ts` (tutte le regole).
+
+Nuovo form, in ordine: modello con valori iniziali definiti → regole nello schema → template con `[formRoot]` e `[field]` → label ed errori in `it.json` → validatori custom in `shared/validators` con `.spec.ts`.
 
 ## Struttura di un form
 

@@ -20,14 +20,42 @@ npm test         # test con Vitest
 | `src/app/shared/validators/` | validatori custom (`password`, `url`) con i relativi `.spec.ts` |
 | `src/app/shared/i18n/` | `translate()` e caricamento traduzioni |
 | `public/i18n/it.json` | tutti i testi di label, errori e toast |
-| `docs/` | documentazione |
 | `.claude/rules/` | regole di dettaglio per Claude Code (angular, form-components, signal-forms, structure, styling) |
 
-## Signal Forms
+## Come funzionano i Signal Forms
 
-Il progetto usa solo Signal Forms: mai `FormGroup`, `FormControl` o `ngModel`. Un form è fatto di modello (`signal`), regole (funzione schema di `form()`) e template (`[formRoot]` + `[formField]`); l'invio è `submission.action` e restituisce una `Promise`.
+Il progetto usa solo Signal Forms (`@angular/forms/signals`): mai `FormGroup`, `FormControl` o `ngModel`. Un form ha tre parti separate:
 
-Guida completa: [docs/guida-signal-forms.md](docs/guida-signal-forms.md).
+1. **Modello:** un `signal` tipizzato con i soli dati, con valori iniziali sempre definiti (`''`, `null`, `false`, `[]`).
+2. **Regole:** una funzione schema, secondo argomento di `form()`. Le regole di validazione stanno solo qui, mai nel template.
+3. **Template:** `[formRoot]` sul `<form>` e `[field]` sui controlli (`app-input-text`, `app-input-checkbox`).
+
+```ts
+model = signal<LoginModel>({ email: '', password: '' });
+
+form = form(
+  this.model,
+  (p) => {
+    required(p.email);
+    email(p.email);
+    required(p.password);
+    minLength(p.password, 8);
+  },
+  { submission: { action: (field) => /* Promise */ } },
+);
+```
+
+```html
+<form [formRoot]="form">
+  <app-input-text label="login.fields.email" type="email" [field]="form.email" />
+  <button type="submit" [disabled]="form().invalid() || form().submitting()">Accedi</button>
+</form>
+```
+
+- **Invio:** `[formRoot]` esegue `submission.action` solo se il form è valido. L'azione restituisce una `Promise`: finché è pendente `form().submitting()` è `true`.
+- **Errori:** una regola restituisce solo un `kind`; il testo viene da `common.validation.<kind>` in `public/i18n/it.json` e si mostra solo con campo toccato e non valido.
+- **Esempi:** `pages/login` (submit su API) e `pages/register` (tutte le regole).
+- **Regole complete** (validazione, stato, validatori custom, componenti): `.claude/rules/signal-forms.md` e `.claude/rules/form-components.md`.
 
 ## Convenzioni
 
@@ -38,5 +66,4 @@ Guida completa: [docs/guida-signal-forms.md](docs/guida-signal-forms.md).
 
 ## Risorse
 
-- [Guida ai Signal Forms del progetto](docs/guida-signal-forms.md)
 - [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
