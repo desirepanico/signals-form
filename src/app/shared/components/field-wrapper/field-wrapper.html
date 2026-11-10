@@ -1,0 +1,12 @@
+<div class="space-y-1">
+  <label
+    class="block text-sm font-medium"
+    [class]="disabled() ? 'text-slate-400' : 'text-slate-700'"
+  >
+    {{ translatedLabel() }}
+    <ng-content />
+  </label>
+  @if (errors().length) {
+    <app-error-message [errors]="errors()" [field]="fieldName()" />
+  }
+</div>

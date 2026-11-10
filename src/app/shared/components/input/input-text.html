@@ -1,0 +1,17 @@
+<app-field-wrapper
+  [label]="label()"
+  [disabled]="field()().disabled()"
+  [errors]="hasError() ? field()().errors() : []"
+>
+  @switch (type()) {
+    @case ('number') {
+      <input type="number" [formField]="asNumber()" [class]="inputClass()" />
+    }
+    @case ('date') {
+      <input type="date" [formField]="asDate()" [class]="inputClass()" />
+    }
+    @default {
+      <input [type]="type()" [formField]="asString()" [class]="inputClass()" />
+    }
+  }
+</app-field-wrapper>

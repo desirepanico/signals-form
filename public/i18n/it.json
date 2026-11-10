@@ -1,0 +1,51 @@
+{
+  "common": {
+    "validation": {
+      "required": "Il campo {{field}} è richiesto",
+      "email": "Il campo {{field}} deve essere un indirizzo email valido",
+      "minLength": "Il campo {{field}} deve contenere almeno {{minLength}} caratteri",
+      "maxLength": "Il campo {{field}} deve contenere al massimo {{maxLength}} caratteri",
+      "min": "Il campo {{field}} deve essere almeno {{min}}",
+      "max": "Il campo {{field}} deve essere al massimo {{max}}",
+      "minDate": "Il campo {{field}} è precedente alla data minima consentita",
+      "maxDate": "Il campo {{field}} è successivo alla data massima consentita",
+      "pattern": "Il campo {{field}} non è nel formato corretto",
+      "https": "Il campo {{field}} deve iniziare con https://",
+      "passwordMismatch": "Le password non coincidono",
+      "passwordLength": "La password deve avere tra 8 e 100 caratteri",
+      "passwordUpper": "La password deve contenere almeno una lettera maiuscola",
+      "passwordLower": "La password deve contenere almeno una lettera minuscola",
+      "passwordDigit": "La password deve contenere almeno una cifra",
+      "passwordSpecial": "La password deve contenere almeno un carattere speciale",
+      "generic": "Il campo {{field}} non è valido"
+    }
+  },
+  "login": {
+    "errors": {
+      "invalidCredentials": "Email o password non corretti",
+      "serverError": "Servizio non disponibile, riprova più tardi"
+    },
+    "fields": {
+      "email": "Email",
+      "password": "Password"
+    }
+  },
+  "registration": {
+    "fields": {
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Conferma password",
+      "phone": "Telefono (555-123-4567)",
+      "website": "Sito web",
+      "age": "Età",
+      "birthDate": "Data di nascita",
+      "applyDiscount": "Ho un codice sconto",
+      "promoCode": "Codice promo",
+      "fiscalCode": "Codice fiscale",
+      "vatNumber": "Partita IVA (11 cifre)",
+      "itemName": "Nome articolo",
+      "itemQuantity": "Quantità"
+    }
+  }
+}
