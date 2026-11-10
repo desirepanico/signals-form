@@ -21,6 +21,7 @@ import {
   schema,
 } from '@angular/forms/signals';
 import { InputCheckbox } from '../../shared/components/input/input-checkbox';
+import { InputPassword } from '../../shared/components/input/input-password';
 import { InputText } from '../../shared/components/input/input-text';
 import { passwordMatch, passwordStrength } from '../../shared/validators/password.validator';
 import { https } from '../../shared/validators/url.validator';
@@ -80,7 +81,7 @@ function todayUtc(): Date {
 
 @Component({
   selector: 'app-register',
-  imports: [FormRoot, InputText, InputCheckbox, RouterLink],
+  imports: [FormRoot, InputText, InputPassword, InputCheckbox, RouterLink],
   templateUrl: './register.html',
   
 })

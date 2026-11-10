@@ -4,10 +4,14 @@
 
     <app-input-text label="registration.fields.username" [field]="form.username" />
     <app-input-text label="registration.fields.email" type="email" [field]="form.email" />
-    <app-input-text label="registration.fields.password" type="password" [field]="form.password" />
-    <app-input-text
+    <app-input-password
+      label="registration.fields.password"
+      autocomplete="new-password"
+      [field]="form.password"
+    />
+    <app-input-password
       label="registration.fields.confirmPassword"
-      type="password"
+      autocomplete="new-password"
       [field]="form.confirmPassword"
     />
     <app-input-text label="registration.fields.phone" type="tel" [field]="form.phone" />

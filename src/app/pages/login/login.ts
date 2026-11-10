@@ -12,6 +12,7 @@ import {
   TreeValidationResult,
 } from '@angular/forms/signals';
 import { ApiError, AuthService } from '../../core/auth/auth.service';
+import { InputPassword } from '../../shared/components/input/input-password';
 import { InputText } from '../../shared/components/input/input-text';
 import { ToastService } from '../../shared/services/toast.service';
 
@@ -27,7 +28,7 @@ const emailFieldSchema = schema<string>((path) => {
 
 @Component({
   selector: 'app-login',
-  imports: [FormRoot, InputText, RouterLink],
+  imports: [FormRoot, InputPassword, InputText, RouterLink],
   templateUrl: './login.html',
 })
 export class Login {

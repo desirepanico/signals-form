@@ -10,7 +10,7 @@ import { FieldWrapper } from '../field-wrapper/field-wrapper';
 })
 export class InputText {
   readonly label = input.required<string>();
-  readonly type = input<'text' | 'email' | 'password' | 'tel' | 'url' | 'number' | 'date'>('text');
+  readonly type = input<'text' | 'email' | 'tel' | 'url' | 'number' | 'date'>('text');
   readonly field = input.required<FieldTree<string> | FieldTree<number | null> | FieldTree<Date | null>>();
 
   // Il tipo del campo dipende da `type`: i cast servono solo al type-check del template.

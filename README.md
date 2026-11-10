@@ -16,7 +16,7 @@ npm test         # test con Vitest
 | --- | --- |
 | `src/app/pages/` | pagine: `login` (form semplice con submit su API), `register` (tutte le regole), `home` |
 | `src/app/core/auth/` | `AuthService` e `auth.guard` |
-| `src/app/shared/components/` | componenti riusabili: `input-text`, `input-checkbox`, `field-wrapper`, `error-message`, `toast` |
+| `src/app/shared/components/` | componenti riusabili: `input-text`, `input-password`, `input-checkbox`, `field-wrapper`, `error-message`, `toast` |
 | `src/app/shared/validators/` | validatori custom (`password`, `url`) con i relativi `.spec.ts` |
 | `src/app/shared/i18n/` | `translate()` e caricamento traduzioni |
 | `public/i18n/it.json` | tutti i testi di label, errori e toast |
@@ -28,7 +28,7 @@ Il progetto usa solo Signal Forms (`@angular/forms/signals`): mai `FormGroup`, `
 
 1. **Modello:** un `signal` tipizzato con i soli dati, con valori iniziali sempre definiti (`''`, `null`, `false`, `[]`).
 2. **Regole:** una funzione schema, secondo argomento di `form()`. Le regole di validazione stanno solo qui, mai nel template.
-3. **Template:** `[formRoot]` sul `<form>` e `[field]` sui controlli (`app-input-text`, `app-input-checkbox`).
+3. **Template:** `[formRoot]` sul `<form>` e `[field]` sui controlli (`app-input-text`, `app-input-password`, `app-input-checkbox`).
 
 ```ts
 model = signal<LoginModel>({ email: '', password: '' });

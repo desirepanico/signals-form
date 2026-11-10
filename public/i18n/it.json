@@ -1,5 +1,9 @@
 {
   "common": {
+    "password": {
+      "show": "Mostra password",
+      "hide": "Nascondi password"
+    },
     "validation": {
       "required": "Il campo {{field}} è richiesto",
       "email": "Il campo {{field}} deve essere un indirizzo email valido",

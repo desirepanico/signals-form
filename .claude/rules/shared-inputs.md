@@ -8,7 +8,8 @@ Tutti standalone, in `src/app/shared/components/<nome>/`.
 
 | Componente                                      | Ruolo                                                                                                                                                   |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `input/input-text` (`<app-input-text>`)         | input `text`, `email`, `password`, `tel`, `url`, `number`, `date`. Input: `label`, `type`, `field`. Gestisce bordo rosso su errore e stato disabilitato |
+| `input/input-text` (`<app-input-text>`)         | input `text`, `email`, `tel`, `url`, `number`, `date`. Input: `label`, `type`, `field`. Gestisce bordo rosso su errore e stato disabilitato |
+| `input/input-password` (`<app-input-password>`) | campo password con pulsante mostra/nascondi (stato `visible` solo di UI, testi in `common.password`). Input: `label`, `field`, `autocomplete` (`new-password` in registrazione). Da usare per ogni password, non `input-text` | 
 | `input/input-checkbox` (`<app-input-checkbox>`) | casella `boolean`                                                                                                                                       |
 | `field-wrapper` (`<app-field-wrapper>`)         | label (tradotta) + `<ng-content />` + errori. Input: `label`, `disabled`, `errors`                                                                      |
 | `error-message` (`<app-error-message>`)         | mostra il primo errore tradotto in base al `kind`                                                                                                       |
