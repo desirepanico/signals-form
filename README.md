@@ -12,50 +12,22 @@ npm test         # test con Vitest
 
 ## Struttura
 
-| Percorso | Contenuto |
-| --- | --- |
-| `src/app/pages/` | pagine: `login` (form semplice con submit su API), `register` (tutte le regole), `home` |
-| `src/app/core/auth/` | `AuthService` e `auth.guard` |
-| `src/app/shared/components/` | componenti riusabili: `input-text`, `input-password`, `input-checkbox`, `field-wrapper`, `error-message`, `toast` |
-| `src/app/shared/validators/` | validatori custom (`password`, `url`) con i relativi `.spec.ts` |
-| `src/app/shared/i18n/` | `translate()` e caricamento traduzioni |
-| `public/i18n/it.json` | tutti i testi di label, errori e toast |
-| `.claude/rules/` | regole di dettaglio per Claude Code (angular, shared-inputs, signal-forms, structure, styling) |
-
-## Come funzionano i Signal Forms
-
-Il progetto usa solo Signal Forms (`@angular/forms/signals`): mai `FormGroup`, `FormControl` o `ngModel`. Un form ha tre parti separate:
-
-1. **Modello:** un `signal` tipizzato con i soli dati, con valori iniziali sempre definiti (`''`, `null`, `false`, `[]`).
-2. **Regole:** una funzione schema, secondo argomento di `form()`. Le regole di validazione stanno solo qui, mai nel template.
-3. **Template:** `[formRoot]` sul `<form>` e `[field]` sui controlli (`app-input-text`, `app-input-password`, `app-input-checkbox`).
-
-```ts
-model = signal<LoginModel>({ email: '', password: '' });
-
-form = form(
-  this.model,
-  (p) => {
-    required(p.email);
-    email(p.email);
-    required(p.password);
-    minLength(p.password, 8);
-  },
-  { submission: { action: (field) => /* Promise */ } },
-);
+```text
+src/app/
+  core/auth/                 AuthService e auth.guard
+  pages/                     login, register, home (ts + html)
+  shared/
+    components/              controlli riusabili dei form
+      input/                 input-text, input-password, input-checkbox
+      field-wrapper/         label + controllo + errori
+      error-message/         primo errore, tradotto
+      toast/                 messaggi a comparsa
+    validators/              validatori custom (+ .spec.ts)
+    services/                ToastService
+    i18n/                    translate() e caricamento traduzioni
+public/i18n/it.json          tutti i testi di label, errori e toast
+.claude/rules/               regole del progetto per Claude Code
 ```
-
-```html
-<form [formRoot]="form">
-  <app-input-text label="login.fields.email" type="email" [field]="form.email" />
-  <button type="submit" [disabled]="form().invalid() || form().submitting()">Accedi</button>
-</form>
-```
-
-- **Invio:** `[formRoot]` esegue `submission.action` solo se il form è valido. L'azione restituisce una `Promise`: finché è pendente `form().submitting()` è `true`.
-- **Errori:** una regola restituisce solo un `kind`; il testo viene da `common.validation.<kind>` in `public/i18n/it.json` e si mostra solo con campo toccato e non valido.
-- **Esempi:** `pages/login` (submit su API) e `pages/register` (tutte le regole).
-- **Regole complete** (validazione, stato, validatori custom, componenti): `.claude/rules/signal-forms.md` e `.claude/rules/shared-inputs.md`.
 
 ## Convenzioni
 
@@ -63,6 +35,14 @@ form = form(
 - Stile solo Tailwind, classi condizionali come stringhe complete in `[class]`.
 - Nessun testo scritto nel codice per label ed errori: tutto in `public/i18n/it.json`.
 - Ogni validatore custom ha il suo `.spec.ts`.
+
+## Signal Forms
+
+Il progetto usa solo Signal Forms: mai `FormGroup`, `FormControl` o `ngModel`. Un form è fatto di un modello (`signal`), regole (funzione schema di `form()`) e template (`[formRoot]` + `[field]`).
+
+- **Guida passo per passo:** [docs/progetto-e-signal-forms.md](docs/progetto-e-signal-forms.md).
+- **Regole per il codice:** `.claude/rules/signal-forms.md` (form) e `.claude/rules/shared-inputs.md` (controlli e traduzioni).
+- **Esempi:** `pages/login` (submit su API) e `pages/register` (tutte le regole).
 
 ## Risorse
 
