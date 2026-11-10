@@ -1,6 +1,6 @@
-# Componenti dei form e traduzioni
+# Input condivisi e traduzioni
 
-Questa rule riguarda **come il campo è mostrato e con quali parole**. Modello, regole di validazione e submit: `signal-forms.md`. Punto di contatto: la regola restituisce solo un `kind`, il testo sta in `common.validation.<kind>` di `it.json`.
+Si applica ai controlli in `src/app/shared/components` (come si collegano a un `FieldTree`) e ai testi in `it.json`. Modello, regole di validazione e submit: `signal-forms.md`. Punto di contatto: la regola restituisce solo un `kind`, il testo sta in `common.validation.<kind>`.
 
 ## Componenti shared
 

@@ -20,7 +20,7 @@ npm test         # test con Vitest
 | `src/app/shared/validators/` | validatori custom (`password`, `url`) con i relativi `.spec.ts` |
 | `src/app/shared/i18n/` | `translate()` e caricamento traduzioni |
 | `public/i18n/it.json` | tutti i testi di label, errori e toast |
-| `.claude/rules/` | regole di dettaglio per Claude Code (angular, form-components, signal-forms, structure, styling) |
+| `.claude/rules/` | regole di dettaglio per Claude Code (angular, shared-inputs, signal-forms, structure, styling) |
 
 ## Come funzionano i Signal Forms
 
@@ -55,7 +55,7 @@ form = form(
 - **Invio:** `[formRoot]` esegue `submission.action` solo se il form è valido. L'azione restituisce una `Promise`: finché è pendente `form().submitting()` è `true`.
 - **Errori:** una regola restituisce solo un `kind`; il testo viene da `common.validation.<kind>` in `public/i18n/it.json` e si mostra solo con campo toccato e non valido.
 - **Esempi:** `pages/login` (submit su API) e `pages/register` (tutte le regole).
-- **Regole complete** (validazione, stato, validatori custom, componenti): `.claude/rules/signal-forms.md` e `.claude/rules/form-components.md`.
+- **Regole complete** (validazione, stato, validatori custom, componenti): `.claude/rules/signal-forms.md` e `.claude/rules/shared-inputs.md`.
 
 ## Convenzioni
 

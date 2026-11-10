@@ -2,7 +2,7 @@
 
 Solo Signal Forms (`@angular/forms/signals`, Angular 22). Mai `FormGroup`/`FormControl`/`ngModel`.
 
-Questa rule riguarda la **logica** del form (modello, schema, submit, stato, validatori). Componenti dei controlli, label, errori tradotti e toast: `form-components.md`. Esempi reali: `pages/login/login.ts` (submit su API), `pages/register/register.ts` (tutte le regole).
+Si applica a chi scrive un form (pagine, `shared/validators`): **logica** del form (modello, schema, submit, stato, validatori). Componenti dei controlli, label, errori tradotti e toast: `shared-inputs.md`. Esempi reali: `pages/login/login.ts` (submit su API), `pages/register/register.ts` (tutte le regole).
 
 Nuovo form, in ordine: modello con valori iniziali definiti → regole nello schema → template con `[formRoot]` e `[field]` → label ed errori in `it.json` → validatori custom in `shared/validators` con `.spec.ts`.
 
@@ -40,11 +40,11 @@ form = form(
 - `action` deve restituire una **`Promise<TreeValidationResult>`**: finché è pendente `form().submitting()` è `true` (usarlo per disabilitare il bottone e cambiare il testo).
 - Con le chiamate RxJS (`takeUntilDestroyed` come in `angular.md`): `subscribe({ next, error, complete })` dentro una `new Promise` risolta in `next`, `error` e `complete` (quest'ultimo evita una Promise pendente se il componente è distrutto a metà chiamata).
 - Nell'`action` non dare a una variabile il nome di una regola importata (es. `const { email } = ...` oscura `email()`): usare `const credentials = field().value()`.
-- Gli errori delle API si mostrano in un toast (vedi `form-components.md`), non come errore di campo: l'`action` risolve comunque con `undefined`.
+- Gli errori delle API si mostrano in un toast (vedi `shared-inputs.md`), non come errore di campo: l'`action` risolve comunque con `undefined`.
 
 ## Regole di validazione
 
-Si dichiarano nello schema, mai nel template e mai nei componenti dei controlli. Le regole sono indipendenti: la validazione non si ferma al primo errore. **Non passare `message`**: il testo viene da `it.json` in base al `kind` (vedi `form-components.md`).
+Si dichiarano nello schema, mai nel template e mai nei componenti dei controlli. Le regole sono indipendenti: la validazione non si ferma al primo errore. **Non passare `message`**: il testo viene da `it.json` in base al `kind` (vedi `shared-inputs.md`).
 
 | Regola                         | Uso                                                                                                                                                           |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
